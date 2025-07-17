@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barcha Ma'lumotlar</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h2 { color: #2c3e50; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 8px; }
+        section { margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+    <h1>Ma'lumotlar Ro'yxati</h1>
+
+    <section>
+        <h2>📁 Kategoriyalar</h2>
+        <ul>
+            {% for category in categories %}
+                <li>{{ category.title }}</li>
+            {% empty %}
+                <li>Hech qanday kategoriya mavjud emas.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>🌍 Regionlar</h2>
+        <ul>
+            {% for region in regions %}
+                <li>{{ region.title }} - {{ region.context }} (Kategoriya: {{ region.category.title }})</li>
+            {% empty %}
+                <li>Hech qanday region mavjud emas.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>🏙️ Tumanlar</h2>
+        <ul>
+            {% for district in districts %}
+                <li>
+                    {{ district.title }} - {{ district.context }}<br>
+                    (Region: {{ district.region.title }})<br>
+                    Yaratilgan: {{ district.created_date }} | Yangilangan: {{ district.updated_date }}
+                </li>
+            {% empty %}
+                <li>Hech qanday tuman mavjud emas.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>🏘️ Mahallalar</h2>
+        <ul>
+            {% for neighbourhood in neighbourhoods %}
+                <li>
+                    {{ neighbourhood.title }} - {{ neighbourhood.context }}<br>
+                    (Tuman: {{ neighbourhood.district.title }})<br>
+                    Yaratilgan: {{ neighbourhood.created_date }} | Yangilangan: {{ neighbourhood.updated_date }}
+                </li>
+            {% empty %}
+                <li>Hech qanday mahalla mavjud emas.</li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>
